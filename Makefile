@@ -1,5 +1,5 @@
 build:
-	@npx expo export:web
+	@yarn expo export:web
 
 dev:
-	@npx expo start
+	@yarn expo start
