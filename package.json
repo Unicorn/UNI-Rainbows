@@ -15,7 +15,7 @@
     "@react-navigation/material-top-tabs": "^6.6.2",
     "@react-navigation/native": "^6.1.6",
     "@types/react": "~18.0.27",
-    "expo": "~48.0.11",
+    "expo": "^49.0.6",
     "expo-splash-screen": "~0.18.2",
     "expo-status-bar": "~1.4.4",
     "firebase": "^9.21.0",
