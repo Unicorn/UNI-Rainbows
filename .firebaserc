@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "unicorn-rainbows"
+    "default": "unicorn-rainbows",
+    "config": "config/firebase.json"
   }
 }
