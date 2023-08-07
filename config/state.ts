@@ -5,12 +5,15 @@ import { Schema } from './storage'
 import { steps } from '../helpers/assessment'
 
 export const SCREENS = {
-  SEARCH: 'Search',
   FAVORITES: 'Favorites',
   AVAILABILITY: 'Availability',
 }
 
 export const defaultSchema: Schema = {
+  acceptedTerms: false,
+  name: '',
+  email: '',
+  reason: '',
   step: steps[0],
   colorChoices1: [],
   colorChoices2: [],

@@ -5,7 +5,7 @@ import { Text, View, StyleSheet } from 'react-native'
 import { THEME } from '../config/theme'
 import { SearchResponse } from '../types/search'
 import List from './List'
-import Loading from './Loading'
+import Loading from './global/Loading'
 import { isMobile } from '../helpers/screen'
 
 interface Props {

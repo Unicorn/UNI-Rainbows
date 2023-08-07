@@ -2,7 +2,7 @@
 
 import LottieView from 'lottie-react-native'
 
-import logo from '../assets/lottie/logo.json'
+import logo from '../../assets/lottie/logo.json'
 
 export default function Loading() {
   return (

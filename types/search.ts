@@ -3,7 +3,7 @@
 export interface RegisterForm {
   name: string
   email: string
-  description: string
+  reason: string
 }
 
 export interface SearchItem {

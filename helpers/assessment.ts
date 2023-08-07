@@ -11,9 +11,9 @@ export interface Color {
   selected: boolean
 }
 
-export type Steps = 'color1' | 'survey1' | 'color2' | 'complete'
+export type Steps = 'intro' | 'register' | 'color1' | 'survey1' | 'color2' | 'complete'
 
-export const steps: Steps[] = ['color1', 'survey1', 'color2', 'complete']
+export const steps: Steps[] = ['intro', 'register', 'color1', 'survey1', 'color2', 'complete']
 
 export function colorChoices(): Color[] {
   let arr: Color[] = []

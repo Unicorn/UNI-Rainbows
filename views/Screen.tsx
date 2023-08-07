@@ -1,6 +1,6 @@
 /** @format */
 
-import { ScrollView, StyleSheet } from 'react-native'
+import { ScrollView, StyleSheet, Dimensions } from 'react-native'
 
 import { THEME } from '../config/theme'
 
@@ -18,12 +18,12 @@ export default function Screen({ children }: Props) {
 
 const styles = StyleSheet.create({
   screen: {
-    backgroundColor: '#fff',
-    flex: 1,
+    backgroundColor: THEME.colors.neutral[0],
   },
   scroll: {
     alignSelf: 'center',
     alignItems: 'center',
+    height: Dimensions.get('window').height,
     justifyContent: 'center',
     width: '100%',
   },

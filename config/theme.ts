@@ -7,6 +7,10 @@ export const THEME = {
     tertiary: '#FFD465',
   },
   colors: {
+    black: {
+      0: '#fff',
+      900: '#000',
+    },
     neutral: {
       0: '#F2F3F5',
       10: '#F5F2ED',

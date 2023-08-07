@@ -2,7 +2,7 @@
 
 import Screen from './Screen'
 import List from './List'
-import Header from './Header'
+import Header from './global/Header'
 import Container from './Container'
 
 export default function FavoritesScreen() {

@@ -1,21 +1,21 @@
 /** @format */
 
-import { useCallback, useState } from 'react'
+import { Suspense, useCallback, useState } from 'react'
 import { Platform, StyleSheet } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
 import { initializeApp } from 'firebase/app'
-import { getAnalytics } from 'firebase/analytics'
+import { getAnalytics, isSupported } from 'firebase/analytics'
+import { useTranslation } from 'react-i18next'
 
-import HomeScreen from './views/HomeScreen'
-import FavoritesScreen from './views/FavoritesScreen'
-import AvailabilityScreen from './views/AvailabilityScreen'
+import './config/i18n'
 import { THEME } from './config/theme'
-import { SearchItem } from './types/search'
-import { SchemaContext, SCREENS, defaultSchema } from './config/state'
+import { SchemaContext, defaultSchema } from './config/state'
 import { Schema } from './config/storage'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
+import HomeScreen from './views/HomeScreen'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCNB_3BqwnB4Varzcv1q3g5AjDSPQYXqBc',
@@ -29,13 +29,15 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig)
-const analytics = getAnalytics(app)
 
-const Tab = createMaterialTopTabNavigator()
+isSupported() && getAnalytics(app)
+
+const Tab = createMaterialBottomTabNavigator()
 
 SplashScreen.preventAutoHideAsync()
 
 export default function App() {
+  const { t } = useTranslation()
   const [schema, setSchema] = useState<Schema>(defaultSchema)
 
   const [fontsLoaded] = useFonts({
@@ -54,23 +56,17 @@ export default function App() {
   }
 
   return (
-    <SchemaContext.Provider value={{ schema, setSchema }}>
-      <NavigationContainer onReady={onLayoutRootView}>
-        <Tab.Navigator
-          screenOptions={{
-            tabBarActiveTintColor: THEME.colors.neutral[900],
-            tabBarInactiveTintColor: '#fff',
-            tabBarIndicatorStyle: styles.selected,
-            tabBarLabelStyle: styles.label,
-            tabBarStyle: styles.tabs,
-          }}
-        >
-          <Tab.Screen name={SCREENS.SEARCH} component={HomeScreen} />
-          <Tab.Screen name={SCREENS.FAVORITES} component={FavoritesScreen} />
-          <Tab.Screen name={SCREENS.AVAILABILITY} component={AvailabilityScreen} />
-        </Tab.Navigator>
-      </NavigationContainer>
-    </SchemaContext.Provider>
+    <Suspense fallback="Loading...">
+      <SchemaContext.Provider value={{ schema, setSchema }}>
+        <SafeAreaProvider>
+          <NavigationContainer onReady={onLayoutRootView}>
+            <Tab.Navigator>
+              <Tab.Screen name={t('nav.home')} component={HomeScreen} />
+            </Tab.Navigator>
+          </NavigationContainer>
+        </SafeAreaProvider>
+      </SchemaContext.Provider>
+    </Suspense>
   )
 }
 

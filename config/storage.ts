@@ -19,6 +19,10 @@ export const STORAGE_KEYS = {
 }
 
 export interface Schema {
+  acceptedTerms: boolean
+  name: string
+  email: string
+  reason: string
   step: Steps
   colorChoices1: number[]
   colorChoices2: number[]

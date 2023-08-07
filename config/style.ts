@@ -1,12 +1,12 @@
 /** @format */
 
-import { Platform, StyleSheet } from 'react-native'
+import { Dimensions, StyleSheet } from 'react-native'
 import { THEME } from './theme'
 import { isMobile } from '../helpers/screen'
 
 export const STYLE = StyleSheet.create({
   input: {
-    backgroundColor: '#fff',
+    backgroundColor: THEME.colors.black[0],
     borderRadius: 10,
     fontSize: THEME.size[3],
     marginBottom: THEME.space[3],
@@ -17,7 +17,7 @@ export const STYLE = StyleSheet.create({
       height: 4,
       width: 4,
     },
-    width: '100%',
+    width: Dimensions.get('screen').width > 700 ? 700 : '100%',
   },
   button: {
     backgroundColor: '#FFD465',
@@ -37,5 +37,6 @@ export const STYLE = StyleSheet.create({
     },
     textAlign: 'center',
     textTransform: 'uppercase',
+    width: Dimensions.get('screen').width > 700 ? 700 : '100%',
   },
 })

@@ -15,8 +15,9 @@ export default function Container({ children, style }: Props) {
 
 const styles = StyleSheet.create({
   container: {
+    alignItems: 'center',
     alignSelf: 'center',
-    flex: 1,
+    justifyContent: 'center',
     paddingHorizontal: THEME.space[4],
     maxWidth: 1400,
     width: '100%',
