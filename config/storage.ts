@@ -2,6 +2,7 @@
 
 import Storage from 'react-native-storage'
 import { Platform } from 'react-native'
+import { Steps } from '../helpers/assessment'
 
 let storageBackend: globalThis.Storage
 
@@ -13,8 +14,14 @@ if (Platform.OS === 'web') {
 }
 
 export const STORAGE_KEYS = {
+  CHOICES: 'choices',
   RESULTS: 'results',
-  FAVORITES: 'favorites',
+}
+
+export interface Schema {
+  step: Steps
+  colorChoices1: number[]
+  colorChoices2: number[]
 }
 
 export const storage = new Storage({

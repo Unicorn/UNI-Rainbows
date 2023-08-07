@@ -4,21 +4,20 @@ import { useState } from 'react'
 import { View, TextInput, Text, StyleSheet, Platform } from 'react-native'
 
 import { THEME } from '../config/theme'
-import { SearchRequest } from '../types/search'
+import { RegisterForm } from '../types/search'
 import { STYLE } from '../config/style'
 import Collapsable from './Collapsable'
 import Container from './Container'
 import { isMobile } from '../helpers/screen'
-import Heart from './icons/Heart'
 
 interface Props {
-  fetchDomains: (payload: SearchRequest) => void
+  formHandler: (payload: RegisterForm) => void
 }
 
-export default function Hero({ fetchDomains }: Props) {
+export default function Hero({ formHandler }: Props) {
   const [collapse, setCollapse] = useState<boolean>(false)
-  const [brand, setBrand] = useState<string>('')
-  const [keywords, setKeywords] = useState<string>('')
+  const [name, setName] = useState<string>('')
+  const [email, setEmail] = useState<string>('')
   const [description, setDescription] = useState<string>('')
 
   const renderContent = () => (
@@ -27,15 +26,15 @@ export default function Hero({ fetchDomains }: Props) {
         <View style={styles.columns}>
           <View style={styles.column}>
             <Text style={styles.introText}>
-              Welcome to Candy Domains, an A.I. tool for finding the sweetest name! Think of it as your personal candy dispenser of
-              delicious domains. As you search for the perfect domain, you can save runner-ups to your favorites. When you find that PERFECT
-              treat, you'll know it!
+              Welcome to Rainbows, an assessment tool by Unicorn that helps you better understand yourself and your business. Let's start by
+              grabbing your email so that we can save and send your results once you complete the journey! It only takes five minutes to
+              complete this portion and start building your 360 degree view of your business.
             </Text>
           </View>
 
           <View style={[styles.column, styles.form]}>
-            <TextInput style={STYLE.input} value={brand} onChangeText={setBrand} maxLength={30} placeholder="Brand Name" />
-            <TextInput style={STYLE.input} value={keywords} onChangeText={setKeywords} maxLength={80} placeholder="Keywords" />
+            <TextInput style={STYLE.input} value={name} onChangeText={setName} maxLength={30} placeholder="Name" />
+            <TextInput style={STYLE.input} value={email} onChangeText={setEmail} maxLength={80} placeholder="Email" />
 
             <TextInput
               style={[STYLE.input, styles.textarea]}
@@ -44,17 +43,17 @@ export default function Hero({ fetchDomains }: Props) {
               multiline={true}
               numberOfLines={4}
               maxLength={400}
-              placeholder="Description"
+              placeholder="What brought you here today?"
             />
 
             <Text
               style={STYLE.button}
               onPress={() => {
                 setCollapse(!collapse)
-                fetchDomains({ brand, keywords, description })
+                formHandler({ name, email, description })
               }}
             >
-              Find Candy!
+              Let's Go!
             </Text>
           </View>
         </View>
@@ -68,7 +67,7 @@ export default function Hero({ fetchDomains }: Props) {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    backgroundColor: THEME.color.secondary,
+    backgroundColor: THEME.colors.neutral[0],
     justifyContent: 'center',
     paddingBottom: THEME.space[6],
   },
@@ -88,13 +87,12 @@ const styles = StyleSheet.create({
     paddingLeft: isMobile() ? 0 : THEME.space[8],
   },
   introText: {
-    color: 'rgba(255, 255, 255, 0.9)',
+    color: THEME.colors.purple[900],
     fontFamily: THEME.font.body,
-    fontSize: isMobile() ? THEME.size[3] : THEME.size[5],
-    fontWeight: '800',
-    letterSpacing: 1,
+    fontSize: isMobile() ? THEME.size[3] : THEME.size[3],
+    fontWeight: '600',
     lineHeight: isMobile() ? THEME.size[5] : THEME.size[8],
-    textShadowColor: THEME.colors.neutral[800],
+    textShadowColor: THEME.colors.neutral[100],
     textShadowOffset: {
       height: 1,
       width: 1,

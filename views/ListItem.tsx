@@ -1,7 +1,7 @@
 /** @format */
 
 import { useContext } from 'react'
-import { TouchableOpacity, View, StyleSheet, Text, Platform } from 'react-native'
+import { TouchableOpacity, View, StyleSheet, Text } from 'react-native'
 import { useNavigation } from '@react-navigation/core'
 
 import { THEME } from '../config/theme'

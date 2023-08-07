@@ -1,26 +1,27 @@
 /** @format */
 
 import { useEffect, useState } from 'react'
-
 import { StatusBar } from 'expo-status-bar'
 
+import { SearchResponse, RegisterForm } from '../types/search'
 import { STORAGE_KEYS, storage, storageErrHandler } from '../config/storage'
-import { SearchResponse, SearchRequest } from '../types/search'
-import SearchResults from '../views/SearchResults'
+import { useSchema } from '../config/state'
+import { API_ROOT } from '../config/api'
+import { Steps, steps } from '../helpers/assessment'
 import Screen from './Screen'
 import Hero from './Hero'
 import Header from './Header'
-import { API_ROOT } from '../config/api'
 import Container from './Container'
-
-import { MainColor, ColorHex } from 'luscher-test'
-import { View } from 'react-native'
+import ColorChoices from './assessment/ColorChoices'
+import Survey from './assessment/Survey'
+import Results from './assessment/Results'
 
 export default function App() {
   const [loading, setLoading] = useState(false)
+  const { schema, setSchema } = useSchema()
   const [data, setData] = useState<SearchResponse>()
 
-  const fetchDomains = async (payload: SearchRequest) => {
+  const _formHandler = async (payload: RegisterForm) => {
     try {
       setLoading(true)
 
@@ -50,11 +51,21 @@ export default function App() {
     storage.load({ key: STORAGE_KEYS.RESULTS }).then(setData).catch(storageErrHandler)
   }, [])
 
-  const _renderColors = () => {
-    for (let color in MainColor) {
-      console.log('Color', color)
+  function completeHandler(step: Steps) {
+    const currentIndex = steps.indexOf(step)
+    const nextIndex = currentIndex + 1
 
-      return null
+    setTimeout(() => setSchema({ ...schema, step: steps[nextIndex] }), 1000)
+  }
+
+  function renderStep() {
+    switch (schema.step) {
+      case 'color1' || 'color2':
+        return <ColorChoices completeHandler={completeHandler} />
+      case 'survey1':
+        return <Survey />
+      case 'complete':
+        return <Results />
     }
   }
 
@@ -62,13 +73,8 @@ export default function App() {
     <Screen>
       <StatusBar style="auto" />
       <Header animate={loading} text="Domain Search" />
-
-      <View>{_renderColors()}</View>
-
-      <Hero fetchDomains={fetchDomains} />
-      <Container>
-        <SearchResults isLoading={loading} data={data} />
-      </Container>
+      <Hero formHandler={_formHandler} />
+      <Container>{renderStep()}</Container>
     </Screen>
   )
 }

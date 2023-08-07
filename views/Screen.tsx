@@ -18,7 +18,7 @@ export default function Screen({ children }: Props) {
 
 const styles = StyleSheet.create({
   screen: {
-    backgroundColor: '#E0FFED',
+    backgroundColor: '#fff',
     flex: 1,
   },
   scroll: {

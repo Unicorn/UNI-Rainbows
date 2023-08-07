@@ -5,7 +5,7 @@ import { View, FlatList, StyleSheet } from 'react-native'
 
 import { SearchItem } from '../types/search'
 import { storage, STORAGE_KEYS } from '../config/storage'
-import { FavoritesContext } from '../config/state'
+import { useSchema } from '../config/state'
 import ListItem from './ListItem'
 import { THEME } from '../config/theme'
 
@@ -15,23 +15,23 @@ interface Props {
 }
 
 export default function List({ data, type }: Props) {
-  const [favorites, setFavorites] = useContext(FavoritesContext)
+  const { schema, setSchema } = useSchema()
 
   useEffect(() => {
     storage
-      .load({ key: STORAGE_KEYS.FAVORITES })
-      .then(data => setFavorites(data))
+      .load({ key: STORAGE_KEYS.CHOICES })
+      .then(data => setAppData(data))
       .catch(error => console.error('Error loading storage', error))
   }, [])
 
-  console.log('favorites', data)
+  console.log('choices', data)
 
   if (type === 'views')
     return (
       <View style={styles.list}>
         {data &&
           data.map(item => (
-            <ListItem key={item.domain} selected={favorites.length > 0 && favorites.some(f => f.domain === item.domain)} item={item} />
+            <ListItem key={item.domain} selected={appData.length > 0 && appData.some(f => f.domain === item.domain)} item={item} />
           ))}
       </View>
     )
@@ -39,9 +39,9 @@ export default function List({ data, type }: Props) {
     return (
       <FlatList
         style={styles.list}
-        data={data || favorites || []}
+        data={data || appData || []}
         keyExtractor={({ domain }) => domain}
-        renderItem={({ item }) => <ListItem selected={favorites.length > 0 && favorites.some(f => f.domain === item.domain)} item={item} />}
+        renderItem={({ item }) => <ListItem selected={appData.length > 0 && appData.some(f => f.domain === item.domain)} item={item} />}
       />
     )
 }

@@ -64,10 +64,10 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     alignSelf: 'center',
-    borderColor: THEME.color.secondary,
+    borderColor: THEME.colors.neutral[0],
     borderRadius: 50,
     borderWidth: 6,
-    backgroundColor: THEME.color.primary,
+    backgroundColor: '#fff',
     justifyContent: 'center',
     height: 60,
     marginTop: -30,

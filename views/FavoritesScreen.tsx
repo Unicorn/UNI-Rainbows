@@ -9,9 +9,7 @@ export default function FavoritesScreen() {
   return (
     <Screen>
       <Header text="Favorites" />
-      <Container>
-        <List type="flatlist" />
-      </Container>
+      <Container>{/* <List type="flatlist" /> */}</Container>
     </Screen>
   )
 }

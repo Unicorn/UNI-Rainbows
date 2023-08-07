@@ -91,7 +91,7 @@ export const THEME = {
     10: 48,
   },
   font: {
-    display: 'lietome',
-    body: 'alice',
+    display: 'display',
+    body: 'body',
   },
 }

@@ -1,8 +1,8 @@
 /** @format */
 
-export interface SearchRequest {
-  brand: string
-  keywords: string
+export interface RegisterForm {
+  name: string
+  email: string
   description: string
 }
 

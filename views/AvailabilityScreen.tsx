@@ -5,7 +5,6 @@ import { Text, TextInput, View, StyleSheet, TouchableOpacity } from 'react-nativ
 import { AntDesign } from '@expo/vector-icons'
 
 import { SearchItem } from '../types/search'
-import { AvailabilityContext } from '../config/state'
 import { TLD } from '../config/tld'
 import { API_ROOT } from '../config/api'
 import Screen from './Screen'
@@ -15,9 +14,10 @@ import { STYLE } from '../config/style'
 import { THEME } from '../config/theme'
 import Container from './Container'
 import Loading from './Loading'
+import { SchemaContext } from '../config/state'
 
 export default function AvailabilityScreen({ item }) {
-  const [availability, setAvailability] = useContext(AvailabilityContext)
+  const [availability, setAvailability] = useState(SchemaContext)
   const [data, setData] = useState<SearchItem[]>()
   const [search, setSearch] = useState(availability?.domain || '')
   const [loading, setLoading] = useState(false)
