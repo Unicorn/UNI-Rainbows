@@ -5,6 +5,7 @@ import { useFonts } from 'expo-font'
 import { getAnalytics, isSupported } from 'firebase/analytics'
 
 import { firebaseApp } from '@config/firebase'
+import { isMobile } from './screen'
 
 export default function useCacheAssets() {
   const [cacheComplete, setCacheComplete] = useState(false)
@@ -17,7 +18,7 @@ export default function useCacheAssets() {
   // Set Cache Complete
   useEffect(() => {
     async function bootstrap() {
-      await isSupported().then(() => getAnalytics(firebaseApp))
+      if (!isMobile()) await isSupported().then(() => getAnalytics(firebaseApp))
     }
 
     bootstrap()

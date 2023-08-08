@@ -1,6 +1,7 @@
 /** @format */
 import { Slot, Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
+import 'react-native-url-polyfill/auto'
 
 import '@config/firebase'
 import '@config/i18n'
