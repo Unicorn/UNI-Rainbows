@@ -7,7 +7,6 @@ import { IPIPAnswer, getQuestions } from '@lib/ipip'
 import { useSchema } from '@context/SchemaProvider'
 import QuestionBlock from './QuestionBlock'
 import { THEME } from '@config/theme'
-import { nextStep } from '@utility/screen'
 import { router } from 'expo-router'
 
 export default function Ipip() {
@@ -17,17 +16,16 @@ export default function Ipip() {
   const questions = getQuestions()
 
   function answerHandler(answer: IPIPAnswer) {
-    const nextState = { ...schema }
-    nextState.ipip.index++
-    nextState.ipip.answers.push(answer)
+    const nextSchema = { ...schema }
+    nextSchema.ipip.index++
+    nextSchema.ipip.answers.push(answer)
+
+    if (nextSchema.ipip.index === 120) nextSchema.step = 'acute'
+
+    setSchema(nextSchema)
 
     // We've reached the end, on to the next step
-    if (nextState.ipip.index === 120) {
-      nextState.step = nextStep(nextState.step)
-      router.replace(`/${nextState.step}`)
-    }
-
-    setSchema(nextState)
+    if (nextSchema.ipip.index === 120) router.replace('/acute')
   }
 
   return (

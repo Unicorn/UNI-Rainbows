@@ -14,5 +14,6 @@ export function isMobile(): boolean {
 export function nextStep(step: Step): Step {
   const currentIndex = steps.indexOf(step)
   const nextIndex = currentIndex + 1
+  console.log('next', currentIndex, nextIndex, steps[nextIndex])
   return steps[nextIndex]
 }

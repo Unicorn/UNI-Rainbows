@@ -7,7 +7,7 @@ import { MainColor } from 'luscher-test'
 import { useSchema } from '@context/SchemaProvider'
 import { THEME } from '@config/theme'
 import { colorChoices, Color, Step } from '@utility/assessment'
-import { isMobile, nextStep } from '@utility/screen'
+import { isMobile } from '@utility/screen'
 import ColorBlock from '@views/assessment/ColorBlock'
 import { router } from 'expo-router'
 
@@ -25,6 +25,8 @@ export default function ColorChoices({ step }: Props) {
 
     nextSchema[step].push(value)
 
+    if (nextSchema[step].length === 8) nextSchema.step = step === 'luscher1' ? 'ipip' : 'acute'
+
     // Find the color by value and set its selected state
     nextColors.filter(c => c.value === value)[0].selected = true
 
@@ -32,9 +34,7 @@ export default function ColorChoices({ step }: Props) {
     setColors(nextColors)
 
     // If we filled up the first array, lets go to next step
-    if (nextSchema[step].length === 8) {
-      router.replace(`/${nextStep(schema.step)}`)
-    }
+    if (nextSchema[step].length === 8) router.replace(`/${nextSchema.step}`)
   }
 
   return (

@@ -9,7 +9,6 @@ import { IPIPAnswer } from '@lib/ipip'
 import { isMobile } from '@utility/screen'
 
 export interface Schema {
-  hydration: 'vanilla' | 'ready' | 'synchronized'
   authenticated: boolean
   name: string
   email: string
@@ -31,7 +30,6 @@ export interface SchemaProvider {
 }
 
 export const defaultSchema: Schema = {
-  hydration: 'vanilla',
   authenticated: false,
   name: '',
   email: '',
@@ -63,16 +61,17 @@ function useProtectedRoute(schema: Schema) {
   useEffect(() => {
     if (isMobile() && !navigationState?.key) return
 
-    // if (!schema.authenticated) return router.replace('/auth')
-    // else if (schema.luscher1.length < 8) return router.replace(`/luscher1`)
-    // else if (schema.ipip.answers.length < 120) return router.replace(`/ipip`)
-    // else if (schema.luscher2.length < 8) return router.replace(`/luscher2`)
-    // else return router.replace(`/acute`)
+    if (!schema.authenticated) return router.replace('/auth')
+    else if (schema.luscher1.length < 8) return router.replace(`/luscher1`)
+    else if (schema.ipip.answers.length < 120) return router.replace(`/ipip`)
+    else if (schema.luscher2.length < 8) return router.replace(`/luscher2`)
+    else return router.replace(`/acute`)
   }, [authenticated, step, segments])
 }
 
 export function SchemaProvider({ children }: { children: ReactNode }): ReactNode {
-  const [schema, setSchema] = useState<Schema>(defaultSchema)
+  const [schema, setSchema] = useState(defaultSchema)
+  const [hydrated, setHydrated] = useState(false)
 
   // storage.clearMap()
 
@@ -80,14 +79,16 @@ export function SchemaProvider({ children }: { children: ReactNode }): ReactNode
   useEffect(() => {
     storage
       .load({ key: 'root' })
-      .then(s => setSchema({ ...s, hydration: 'ready' }))
+      .then(setSchema)
       .catch(err => {
         if (err.name === 'NotFoundError') storage.save({ key: 'root', data: defaultSchema }).catch(storageErrHandler)
       })
+
+    setHydrated(true)
   }, [])
 
   useEffect(() => {
-    if (schema.hydration === 'ready') storage.save({ key: 'root', data: { ...schema, hydration: 'synchronized' } }).catch(storageErrHandler)
+    if (hydrated) storage.save({ key: 'root', data: { ...schema, hydration: 'synchronized' } }).catch(storageErrHandler)
   }, [schema])
 
   useProtectedRoute(schema)
