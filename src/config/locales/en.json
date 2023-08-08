@@ -20,6 +20,12 @@
     "register": {
       "header": "Register"
     },
+    "color1": {
+      "header": "Paint Your Rainbow"
+    },
+    "survey1": {
+      "header": "Survey"
+    },
     "complete": {
       "header": "Your Results"
     }

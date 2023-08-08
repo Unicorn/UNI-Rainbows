@@ -1,6 +1,6 @@
 /** @format */
 
-import { Text, View } from 'react-native'
+import { Text, TouchableOpacity, View } from 'react-native'
 import { useTranslation } from 'react-i18next'
 
 import { useSchema } from '@context/SchemaProvider'
@@ -18,15 +18,14 @@ export default function Survey({ completeHandler }: Props) {
   return (
     <View>
       <Text>Survey</Text>
-      <Text
+      <TouchableOpacity
         style={STYLE.button}
         onPress={() => {
-          setSchema({ ...schema, acceptedTerms: true })
           completeHandler('survey1')
         }}
       >
-        {t('intro.cta')}
-      </Text>
+        <Text style={STYLE.buttonText}>{t('intro.cta')}</Text>
+      </TouchableOpacity>
     </View>
   )
 }

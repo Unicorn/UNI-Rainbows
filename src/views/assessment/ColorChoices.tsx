@@ -39,8 +39,7 @@ export default function ColorChoices({ step, completeHandler }: Props) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Choose Colors</Text>
-      <Text style={styles.paragraph}>Pick the color that makes you feel the best and repeat until all are gone.</Text>
+      <Text style={styles.paragraph}>Click the colors in an order based on what makes you feel the best.</Text>
       <View style={styles.layout}>
         {colors.map(color => (
           <ColorBlock key={color.key} color={color} selected={color.selected} pressHandler={pressHandler} />
@@ -55,13 +54,6 @@ const styles = StyleSheet.create({
     paddingVertical: THEME.size[5],
     width: '100%',
   },
-  header: {
-    color: THEME.colors.neutral[900],
-    fontFamily: THEME.font.display,
-    fontSize: isMobile() ? THEME.size[5] : THEME.size[8],
-    textAlign: 'center',
-    paddingTop: THEME.size[5],
-  },
   paragraph: {
     color: THEME.colors.neutral[800],
     fontFamily: THEME.font.body,
@@ -73,7 +65,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    height: '40vh',
     justifyContent: 'space-around',
     width: '100%',
   },

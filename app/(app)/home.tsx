@@ -33,10 +33,8 @@ export default function App() {
 
   return (
     <Screen>
-      <Main>
-        <Header step={schema.step} />
-        {renderStep()}
-      </Main>
+      <Header step={schema.step} />
+      {renderStep()}
     </Screen>
   )
 }

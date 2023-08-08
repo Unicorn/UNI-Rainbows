@@ -1,7 +1,7 @@
 /** @format */
 
 import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState } from 'react'
-import { useSegments, useRouter } from 'expo-router'
+import { useSegments, useRouter, useRootNavigationState } from 'expo-router'
 
 import { steps, Steps } from '@utility/assessment'
 import { storage, storageErrHandler } from '@config/storage'
@@ -48,8 +48,11 @@ export function useSchema() {
 function useProtectedRoute(authenticated: boolean) {
   const segments = useSegments()
   const router = useRouter()
+  const navigationState = useRootNavigationState()
 
   useEffect(() => {
+    if (!navigationState?.key) return
+
     const inAuthGroup = segments[0] === '(auth)'
 
     // If the user is not signed in and the initial segment is not anything in the auth group.
@@ -65,10 +68,7 @@ export function SchemaProvider({ children }: { children: ReactNode }): ReactNode
   useEffect(() => {
     storage
       .load({ key: 'root' })
-      .then(s => {
-        console.log('schema loaded', s)
-        setSchema({ ...schema, ...s, hydrated: true })
-      })
+      .then(s => setSchema({ ...schema, ...s, hydrated: true }))
       .catch(storageErrHandler)
   }, [])
 

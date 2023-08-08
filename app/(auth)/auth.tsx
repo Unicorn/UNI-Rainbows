@@ -1,7 +1,8 @@
 /** @format */
 
 import { useState, useRef, useEffect } from 'react'
-import { ScrollView, Text, StyleSheet, TextInput } from 'react-native'
+import { ScrollView, TextInput, TouchableOpacity } from 'react-native'
+import { Text, StyleSheet } from '@bacons/react-views'
 import { useTranslation } from 'react-i18next'
 import { getAuth, createUserWithEmailAndPassword, sendSignInLinkToEmail } from 'firebase/auth'
 
@@ -12,6 +13,7 @@ import { useSchema } from '@context/SchemaProvider'
 import { isMobile } from '@utility/screen'
 import Header from '@views/global/Header'
 import Loading from '@views/global/Loading'
+import Screen from '@views/global/Screen'
 
 export default function Auth() {
   const { t } = useTranslation()
@@ -51,15 +53,10 @@ export default function Auth() {
       })
   }
 
-  useEffect(() => {
-    loading ? animation.current?.play() : animation.current?.reset()
-  }, [loading])
-
-  if (loading) return <Loading />
-
   return (
-    <ScrollView style={styles.scroll} contentContainerStyle={styles.container}>
+    <Screen>
       <Header step="auth" />
+
       <Text style={styles.introText}>{t('auth.intro')}</Text>
 
       <TextInput
@@ -74,7 +71,7 @@ export default function Auth() {
         style={STYLE.input}
         value={schema.email}
         onChangeText={text => inputHandler('email', text)}
-        maxLength={80}
+        maxLength={30}
         placeholder={t('auth.email')}
       />
 
@@ -88,22 +85,14 @@ export default function Auth() {
         placeholder={t('auth.textarea')}
       />
 
-      <Text style={STYLE.button} onPress={registerHandler}>
-        {t('auth.cta')}
-      </Text>
-    </ScrollView>
+      <TouchableOpacity style={STYLE.button} onPress={registerHandler}>
+        <Text style={STYLE.buttonText}>{t('auth.cta')}</Text>
+      </TouchableOpacity>
+    </Screen>
   )
 }
 
 const styles = StyleSheet.create({
-  scroll: {
-    alignSelf: 'center',
-  },
-  container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    maxWidth: 750,
-  },
   introText: {
     color: THEME.colors.purple[900],
     fontFamily: THEME.font.body,

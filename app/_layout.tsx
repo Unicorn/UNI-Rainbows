@@ -2,8 +2,8 @@
 import { Slot, Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 
-// import '@config/firebase'
-// import '@config/i18n'
+import '@config/firebase'
+import '@config/i18n'
 import { SchemaProvider } from '@context/SchemaProvider'
 import InfoButton from '@views/global/InfoButton'
 import Logo from '@views/global/Logo'
@@ -16,7 +16,6 @@ export default function RootLayout() {
 
       <Stack
         screenOptions={{
-          // headerShown: false,
           headerRight: InfoButton,
           headerTitle: Logo,
           headerTitleStyle: styles.header,
