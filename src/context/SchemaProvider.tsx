@@ -63,11 +63,11 @@ function useProtectedRoute(schema: Schema) {
   useEffect(() => {
     if (isMobile() && !navigationState?.key) return
 
-    if (!schema.authenticated) return router.replace('/auth')
-    else if (schema.luscher1.length < 8) return router.replace(`/luscher1`)
-    else if (schema.ipip.answers.length < 120) return router.replace(`/ipip`)
-    else if (schema.luscher2.length < 8) return router.replace(`/luscher2`)
-    else return router.replace(`/acute`)
+    // if (!schema.authenticated) return router.replace('/auth')
+    // else if (schema.luscher1.length < 8) return router.replace(`/luscher1`)
+    // else if (schema.ipip.answers.length < 120) return router.replace(`/ipip`)
+    // else if (schema.luscher2.length < 8) return router.replace(`/luscher2`)
+    // else return router.replace(`/acute`)
   }, [authenticated, step, segments])
 }
 
