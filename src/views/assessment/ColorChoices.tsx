@@ -52,7 +52,7 @@ export default function ColorChoices({ step, completeHandler }: Props) {
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: THEME.size[10],
+    paddingVertical: THEME.size[5],
     width: '100%',
   },
   header: {
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    height: '50vh',
+    height: '40vh',
     justifyContent: 'space-around',
     width: '100%',
   },

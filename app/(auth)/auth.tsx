@@ -11,12 +11,12 @@ import { THEME } from '@config/theme'
 import { useSchema } from '@context/SchemaProvider'
 import { isMobile } from '@utility/screen'
 import Header from '@views/global/Header'
+import Loading from '@views/global/Loading'
 
 export default function Auth() {
   const { t } = useTranslation()
   const { schema, setSchema } = useSchema()
   const [loading, setLoading] = useState(false)
-  const [password, setPassword] = useState('')
   const animation = useRef(null)
 
   function inputHandler(key: 'name' | 'email' | 'reason', value: string) {
@@ -54,6 +54,8 @@ export default function Auth() {
   useEffect(() => {
     loading ? animation.current?.play() : animation.current?.reset()
   }, [loading])
+
+  if (loading) return <Loading />
 
   return (
     <ScrollView style={styles.scroll} contentContainerStyle={styles.container}>

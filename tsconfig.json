@@ -14,11 +14,11 @@
     "target": "ESNext",
     "baseUrl": ".",
     "paths": {
-      "@assets/*": ["app/assets/*"],
-      "@config/*": ["app/config/*"],
-      "@context/*": ["app/context/*"],
-      "@utility/*": ["app/utility/*"],
-      "@views/*": ["app/views/*"]
+      "@assets/*": ["src/assets/*"],
+      "@config/*": ["src/config/*"],
+      "@context/*": ["src/context/*"],
+      "@utility/*": ["src/utility/*"],
+      "@views/*": ["src/views/*"]
     },
     "strict": true
   },

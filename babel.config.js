@@ -11,11 +11,11 @@ module.exports = function (api) {
         'module-resolver',
         {
           alias: {
-            '@assets': './app/assets',
-            '@config': './app/config',
-            '@context': './app/context',
-            '@utility': './app/utility',
-            '@views': './app/views',
+            '@assets': './src/assets',
+            '@config': './src/config',
+            '@context': './src/context',
+            '@utility': './src/utility',
+            '@views': './src/views',
           },
         },
       ],

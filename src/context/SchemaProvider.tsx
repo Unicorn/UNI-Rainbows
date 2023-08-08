@@ -1,6 +1,6 @@
 /** @format */
 
-import { createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from 'react'
+import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState } from 'react'
 import { useSegments, useRouter } from 'expo-router'
 
 import { steps, Steps } from '@utility/assessment'
@@ -58,7 +58,7 @@ function useProtectedRoute(authenticated: boolean) {
   }, [authenticated, segments])
 }
 
-export function SchemaProvider({ children }: { children: JSX.Element }): JSX.Element {
+export function SchemaProvider({ children }: { children: ReactNode }): ReactNode {
   const [schema, setSchema] = useState<Schema>(defaultSchema)
 
   // Rehydrate from local storage

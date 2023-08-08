@@ -1,15 +1,13 @@
 /** @format */
 
-import { View } from 'react-native'
-import { StatusBar } from 'expo-status-bar'
-
 import { useSchema } from '@context/SchemaProvider'
 import { Steps, steps } from '@utility/assessment'
-import Screen from '@views/global/Screen'
 import ColorChoices from '@views/assessment/ColorChoices'
 import Survey from '@views/assessment/Survey'
 import Results from '@views/assessment/Results'
 import Header from '@views/global/Header'
+import Main from '@views/global/Main'
+import Screen from '@views/global/Screen'
 
 export default function App() {
   const { schema, setSchema } = useSchema()
@@ -34,10 +32,11 @@ export default function App() {
   }
 
   return (
-    <View>
-      <StatusBar style="auto" />
-      <Header step={schema.step} />
-      <Screen>{renderStep()}</Screen>
-    </View>
+    <Screen>
+      <Main>
+        <Header step={schema.step} />
+        {renderStep()}
+      </Main>
+    </Screen>
   )
 }
