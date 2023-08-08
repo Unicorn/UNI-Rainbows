@@ -1,7 +1,7 @@
 /** @format */
 
-import { useState, useRef, useEffect } from 'react'
-import { ScrollView, TextInput, TouchableOpacity } from 'react-native'
+import { useState, useRef } from 'react'
+import { TextInput, TouchableOpacity } from 'react-native'
 import { Text, StyleSheet } from '@bacons/react-views'
 import { useTranslation } from 'react-i18next'
 import { getAuth, createUserWithEmailAndPassword, sendSignInLinkToEmail } from 'firebase/auth'

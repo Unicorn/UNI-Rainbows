@@ -37,7 +37,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#000', // Color is set dynamically
     display: 'flex',
-    height: '48%', // 2 rows => each block takes up 48% of the height
+    height: '100%', // 2 rows => each block takes up 48% of the height
+    minHeight: 120,
     justifyContent: 'center',
     margin: '1%', // Margin to create space between blocks
     width: '23%', // 4 blocks => each 24% to leave some space between blocks

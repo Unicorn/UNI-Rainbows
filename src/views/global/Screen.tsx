@@ -23,13 +23,16 @@ export default function Screen({ children, loading }: Props) {
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    width: '100%',
+  },
   scroll: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     marginHorizontal: 'auto',
     maxWidth: 1200,
     padding: THEME.size[5],
+    width: '100%',
   },
   content: {
     alignItems: 'center',

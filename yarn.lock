@@ -7,6 +7,23 @@
   resolved "https://registry.yarnpkg.com/@0no-co/graphql.web/-/graphql.web-1.0.0.tgz#af3f5e3b9359d2f011bc37a93654348b92d4d893"
   integrity sha512-JBq2pWyDchE1vVjj/+c4dzZ8stbpew4RrzpZ3vYdn1WJFGHfYg6YIX1fDdMKtSXJJM9FUlsoDOxemr9WMM2p+A==
 
+"@alheimsins/b5-johnson-120-ipip-neo-pi-r@^6.0.5":
+  version "6.0.5"
+  resolved "https://registry.yarnpkg.com/@alheimsins/b5-johnson-120-ipip-neo-pi-r/-/b5-johnson-120-ipip-neo-pi-r-6.0.5.tgz#0c86de1dc3627b781e7a353cd329d342a584aa9c"
+  integrity sha512-auZGb/cLELbMjTN/EBsnnCh17XQm8n7fwXAEKfaXOrkLJ5vY+tO/ZoScYpmrHNihYlrq2K85MpwEyN2zIhM0+w==
+  dependencies:
+    knuth-shuffle "1.0.8"
+
+"@alheimsins/b5-result-text@^5.0.5":
+  version "5.0.5"
+  resolved "https://registry.yarnpkg.com/@alheimsins/b5-result-text/-/b5-result-text-5.0.5.tgz#9dc16c6659bbd70e7154c6b9862ab249f6ab8c86"
+  integrity sha512-cew4uJQ8YWfyczM+YVGEfRAqdS7Da+ENfIrBmh9CzJl9AUzyQrgUI6LuUWYL0xJ1dCr8gZbQB6wKH0QpyDCjrA==
+
+"@alheimsins/bigfive-calculate-score@^3.0.3":
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/@alheimsins/bigfive-calculate-score/-/bigfive-calculate-score-3.0.3.tgz#cf05bb89cb433eab51d8cdcd973f45418220448b"
+  integrity sha512-By+1YifaH0WwGtEe5HYg55bE4C/8v6uGKxR0uBehUwucql891tgL9CX8nu1rIzFwQ8Zd1Ylz0YxWBDHCmLFnbA==
+
 "@ampproject/remapping@^2.2.0":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@ampproject/remapping/-/remapping-2.2.1.tgz#99e8e11851128b8702cd57c33684f1d0f260b630"
@@ -6283,6 +6300,11 @@ kleur@^3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/kleur/-/kleur-3.0.3.tgz#a79c9ecc86ee1ce3fa6206d1216c501f147fc07e"
   integrity sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==
+
+knuth-shuffle@1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/knuth-shuffle/-/knuth-shuffle-1.0.8.tgz#929a467b0efd8d297bdcf318ca988a9f1037f80d"
+  integrity sha512-IdC4Hpp+mx53zTt6VAGsAtbGM0g4BV9fP8tTcviCosSwocHcRDw9uG5Rnv6wLWckF4r72qeXFoK9NkvV1gUJCQ==
 
 launch-editor@^2.6.0:
   version "2.6.0"

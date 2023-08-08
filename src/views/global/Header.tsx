@@ -4,11 +4,11 @@ import { StyleSheet, Text } from 'react-native'
 import { useTranslation } from 'react-i18next'
 
 import { THEME } from '@config/theme'
-import { Steps } from '@utility/assessment'
+import { Step } from '@utility/assessment'
 import { isMobile } from '@utility/screen'
 
 interface Props {
-  step?: Steps | string
+  step?: Step | string
 }
 
 export default function Header({ step }: Props) {

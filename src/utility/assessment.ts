@@ -11,9 +11,9 @@ export interface Color {
   selected: boolean
 }
 
-export type Steps = 'color1' | 'survey1' | 'color2' | 'complete'
+export type Step = 'luscher1' | 'ipip' | 'luscher2' | 'results'
 
-export const steps: Steps[] = ['color1', 'survey1', 'color2', 'complete']
+export const steps: Step[] = ['luscher1', 'ipip', 'luscher2', 'results']
 
 export function colorChoices(): Color[] {
   let arr: Color[] = []
@@ -28,4 +28,15 @@ export function colorChoices(): Color[] {
   }
 
   return arr
+}
+
+export function choiceLabel(value: 1 | 2 | 3 | 4 | 5): string | null {
+  switch (value) {
+    case 1:
+      return 'Strongly Disagree'
+    case 5:
+      return 'Strongly Agree'
+    default:
+      return null
+  }
 }

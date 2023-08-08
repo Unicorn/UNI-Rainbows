@@ -14,7 +14,7 @@ if (Platform.OS === 'web') {
 
 export const storage = new Storage({
   // maximum capacity, default 1000 key-ids
-  size: 1000,
+  size: 10000,
 
   // Use AsyncStorage for RN apps, or window.localStorage for web apps.
   // If storageBackend is not set, data will be lost after reload.

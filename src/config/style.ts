@@ -10,7 +10,7 @@ export const STYLE = StyleSheet.create({
     backgroundColor: THEME.colors.black[0],
     borderRadius: 10,
     fontSize: THEME.size[3],
-    marginBottom: THEME.space[3],
+    marginBottom: THEME.space[4],
     padding: THEME.space[3],
     shadowColor: THEME.colors.purple[200],
     shadowRadius: 0,

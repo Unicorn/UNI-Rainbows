@@ -3,7 +3,7 @@
 import { useSchema } from '@context/SchemaProvider'
 import { Steps, steps } from '@utility/assessment'
 import ColorChoices from '@views/assessment/ColorChoices'
-import Survey from '@views/assessment/Survey'
+import Survey from '@views/assessment/Ipip'
 import Results from '@views/assessment/Results'
 import Header from '@views/global/Header'
 import Main from '@views/global/Main'
@@ -20,11 +20,9 @@ export default function App() {
 
   function renderStep() {
     switch (schema.step) {
-      case 'color1':
-        return <ColorChoices step={schema.step} completeHandler={completeHandler} />
       case 'color2':
         return <ColorChoices step={schema.step} completeHandler={completeHandler} />
-      case 'survey1':
+      case 'ipip':
         return <Survey completeHandler={completeHandler} />
       case 'complete':
         return <Results />

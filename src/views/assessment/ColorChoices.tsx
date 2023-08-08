@@ -6,18 +6,18 @@ import { MainColor } from 'luscher-test'
 
 import { useSchema } from '@context/SchemaProvider'
 import { THEME } from '@config/theme'
-import { colorChoices, Color, Steps } from '@utility/assessment'
-import { isMobile } from '@utility/screen'
+import { colorChoices, Color, Step } from '@utility/assessment'
+import { isMobile, nextStep } from '@utility/screen'
 import ColorBlock from '@views/assessment/ColorBlock'
+import { router } from 'expo-router'
 
 interface Props {
-  step: Steps
-  completeHandler: (step: Steps) => void
+  step: 'luscher1' | 'luscher2'
 }
 
-export default function ColorChoices({ step, completeHandler }: Props) {
+export default function ColorChoices({ step }: Props) {
   const { schema, setSchema } = useSchema()
-  const [colors, setColors] = useState<Color[]>(step === 'color1' ? colorChoices() : colorChoices().reverse())
+  const [colors, setColors] = useState<Color[]>(step === 'luscher1' ? colorChoices() : colorChoices().reverse())
 
   function pressHandler(value: MainColor) {
     const nextSchema = { ...schema }
@@ -31,9 +31,9 @@ export default function ColorChoices({ step, completeHandler }: Props) {
     setSchema(nextSchema)
     setColors(nextColors)
 
-    // If we filled up the first array, lets reset color selection
+    // If we filled up the first array, lets go to next step
     if (nextSchema[step].length === 8) {
-      completeHandler(step)
+      router.push(`/${nextStep(schema.step)}`)
     }
   }
 
