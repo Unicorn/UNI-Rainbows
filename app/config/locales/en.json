@@ -1,0 +1,27 @@
+{
+  "translation": {
+    "title": "Welcome {{name}}, to Rainbows",
+    "nav": {
+      "home": "Home"
+    },
+    "auth": {
+      "header": "Personality Asessment",
+      "intro": "Welcome to Rainbow: an assessment tool by Unicorn that helps you better understand yourself and your business.",
+      "name": "Name",
+      "password": "Password",
+      "email": "Email",
+      "textarea": "What are you hoping to achieve with this test?",
+      "cta": "Let's Go!"
+    },
+    "intro": {
+      "header": "Personality Assessment",
+      "cta": "Get Started"
+    },
+    "register": {
+      "header": "Register"
+    },
+    "complete": {
+      "header": "Your Results"
+    }
+  }
+}
