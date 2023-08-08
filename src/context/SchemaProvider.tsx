@@ -63,13 +63,11 @@ function useProtectedRoute(schema: Schema) {
   useEffect(() => {
     if (isMobile() && !navigationState?.key) return
 
-    // If the user is not signed in and the initial segment is not anything in the auth group.
-    console.log('Schema in Provider', schema.authenticated, schema.email)
     if (!schema.authenticated) return router.replace('/auth')
     else if (schema.luscher1.length < 8) return router.replace(`/luscher1`)
     else if (schema.ipip.answers.length < 120) return router.replace(`/ipip`)
     else if (schema.luscher2.length < 8) return router.replace(`/luscher2`)
-    else return router.push(`/results`)
+    else return router.replace(`/results`)
   }, [authenticated, step, segments])
 }
 

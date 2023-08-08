@@ -7,6 +7,8 @@ import { IPIPAnswer, getQuestions } from '@lib/ipip'
 import { useSchema } from '@context/SchemaProvider'
 import QuestionBlock from './QuestionBlock'
 import { THEME } from '@config/theme'
+import { nextStep } from '@utility/screen'
+import { router } from 'expo-router'
 
 export default function Ipip() {
   const { t } = useTranslation()
@@ -18,7 +20,12 @@ export default function Ipip() {
     const nextState = { ...schema }
     nextState.ipip.index++
     nextState.ipip.answers.push(answer)
+
+    // We've reached the end, on to the next step
+    if (nextState.ipip.index === 120) nextState.step = nextStep(nextState.step)
+
     setSchema(nextState)
+    router.push(`/${nextState.step}`)
   }
 
   return (

@@ -16,12 +16,20 @@ interface Props {
 }
 
 export default function QuestionBlock({ index, question, answerHandler }: Props) {
+  if (index === 120 && !question) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.complete}>You're all done! Let's paint another rainbow and take you to your results!</Text>
+      </View>
+    )
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.page}>{index + 1} / 120</Text>
       <Text style={styles.question}>I {question.text.toLowerCase()}</Text>
       <View style={styles.choices}>
-        {getChoices()[question.keyed as IPIPKeyed].map(choice => (
+        {getChoices()[question.keyed].map(choice => (
           <QuestionChoice key={`${question.id}-${choice.score}`} question={question} choice={choice} answerHandler={answerHandler} />
         ))}
       </View>
@@ -49,6 +57,9 @@ const styles = StyleSheet.create({
     position: 'relative',
     width: '100%',
   },
+  complete: {
+    fontSize: THEME.size[5],
+  },
   page: {
     textAlign: 'center',
   },
@@ -57,6 +68,7 @@ const styles = StyleSheet.create({
     fontSize: isMobile() ? THEME.size[5] : THEME.size[8],
     fontWeight: '900',
     letterSpacing: 1,
+    height: 150,
     paddingBottom: THEME.size[9],
     paddingTop: THEME.size[3],
     textAlign: 'center',

@@ -28,10 +28,10 @@ export default function QuestionChoice({ question, choice, answerHandler }: Prop
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.button} onPress={() => answerHandler(answer)}>
-        <FontAwesome name="circle" size={30} color={colors[choice.score]} />
+        <FontAwesome name="circle" size={30} color={colors[choice.color]} />
       </TouchableOpacity>
 
-      <Text style={styles.label}>{choiceLabel(choice.score)}</Text>
+      <Text style={styles.label}>{choiceLabel(choice.color)}</Text>
     </View>
   )
 }

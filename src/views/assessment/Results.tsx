@@ -25,8 +25,8 @@ export default function Results() {
   const [r1, setR1] = useState<InterpretationSection[]>([])
 
   // color codes in order of their selection
-  const firstSelection = schema.color1
-  const secondSelection = schema.color2
+  const firstSelection = schema.luscher1
+  const secondSelection = schema.luscher2
 
   const test = new TwoStageTest(firstSelection, secondSelection)
 
