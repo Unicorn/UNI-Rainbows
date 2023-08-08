@@ -26,8 +26,8 @@
     "ipip": {
       "header": "Survey"
     },
-    "results": {
-      "header": "Your Results"
+    "luscherResults": {
+      "header": "Acute Needs"
     }
   }
 }

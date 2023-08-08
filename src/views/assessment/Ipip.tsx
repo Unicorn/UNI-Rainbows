@@ -22,10 +22,12 @@ export default function Ipip() {
     nextState.ipip.answers.push(answer)
 
     // We've reached the end, on to the next step
-    if (nextState.ipip.index === 120) nextState.step = nextStep(nextState.step)
+    if (nextState.ipip.index === 120) {
+      nextState.step = nextStep(nextState.step)
+      router.replace(`/${nextState.step}`)
+    }
 
     setSchema(nextState)
-    router.push(`/${nextState.step}`)
   }
 
   return (

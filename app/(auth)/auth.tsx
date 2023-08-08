@@ -1,6 +1,6 @@
 /** @format */
 
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import { TextInput, TouchableOpacity } from 'react-native'
 import { Text, StyleSheet } from '@bacons/react-views'
 import { useTranslation } from 'react-i18next'
@@ -15,11 +15,10 @@ import Header from '@views/global/Header'
 import Loading from '@views/global/Loading'
 import Screen from '@views/global/Screen'
 
-export default function Auth() {
+export default () => {
   const { t } = useTranslation()
   const { schema, setSchema } = useSchema()
   const [loading, setLoading] = useState(false)
-  const animation = useRef(null)
 
   function inputHandler(key: 'name' | 'email' | 'reason', value: string) {
     const nextState = { ...schema }
@@ -35,9 +34,6 @@ export default function Auth() {
     createUserWithEmailAndPassword(auth, schema.email, 'password')
       .then(userCredential => {
         const user = userCredential.user
-
-        console.log('Signed in', user)
-
         setLoading(false)
         setSchema({ ...schema, authenticated: true })
       })
@@ -47,7 +43,6 @@ export default function Auth() {
 
         // @TODO: add better auth logic. For now, we just create a user in FB and set authenticated to true
         if (error.code === 'auth/email-already-in-use') {
-          console.log('FB Auth Error, ignoring for now', error)
           setSchema({ ...schema, authenticated: true })
         }
       })

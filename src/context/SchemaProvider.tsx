@@ -17,12 +17,12 @@ export interface Schema {
   step: Step
   luscher1: number[]
   luscher2: number[]
+  luscherResults?: string
   ipip: {
     index: number
     language: string
     answers: IPIPAnswer[]
   }
-  results?: boolean
 }
 
 export interface SchemaProvider {
@@ -67,7 +67,7 @@ function useProtectedRoute(schema: Schema) {
     else if (schema.luscher1.length < 8) return router.replace(`/luscher1`)
     else if (schema.ipip.answers.length < 120) return router.replace(`/ipip`)
     else if (schema.luscher2.length < 8) return router.replace(`/luscher2`)
-    else return router.replace(`/results`)
+    else return router.replace(`/acute`)
   }, [authenticated, step, segments])
 }
 

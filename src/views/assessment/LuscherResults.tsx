@@ -1,7 +1,7 @@
 /** @format */
 
 import { useEffect, useState } from 'react'
-import { ScrollView, StyleSheet } from 'react-native'
+import { StyleSheet, View, Text, ActivityIndicator } from 'react-native'
 import {
   ColorMap,
   EmotionalState,
@@ -14,28 +14,38 @@ import {
   Translations,
   TwoStageTest,
 } from 'luscher-test'
+import { prettyLuscher } from '@lib/openai'
 
 import { useSchema } from '@context/SchemaProvider'
-import LuscherInterpretation from '@views/assessment/LuscherInterpretation'
 import { THEME } from '@config/theme'
+import { key } from '@utility/string'
+import { isObject } from 'lodash'
 
-export default function Results() {
+export default function LuscherResults() {
+  const [loading, setLoading] = useState(false)
   const { schema, setSchema } = useSchema()
-  const [r0, setR0] = useState<InterpretationSection[]>([])
-  const [r1, setR1] = useState<InterpretationSection[]>([])
+  const [raw, setRaw] = useState<[InterpretationSection[], InterpretationSection[]]>()
 
   // color codes in order of their selection
   const firstSelection = schema.luscher1
   const secondSelection = schema.luscher2
-
+  const lang = InterpretationLanguage.ENGLISH
   const test = new TwoStageTest(firstSelection, secondSelection)
 
   useEffect(() => {
+    setLoading(true)
+
     async function getResults() {
-      await test.getInterpretation(InterpretationLanguage.ENGLISH).then(r => {
-        setR0(r[0])
-        setR1(r[1])
-      })
+      const luscherRaw = await test.getInterpretation(lang)
+      setRaw(luscherRaw)
+
+      // ChatGPT Adds up! Lets fetch only if we don't already have it saved.
+      if (!schema.luscherResults) {
+        const luscherResults = await prettyLuscher(JSON.stringify(luscherRaw))
+        if (luscherResults) setSchema({ ...schema, luscherResults })
+      }
+
+      setLoading(false)
 
       // // Obtained color selections
       // const selections: [MainColor[], MainColor[]] = test.selections
@@ -80,19 +90,77 @@ export default function Results() {
 
     getResults()
   }, [])
+
+  function renderFormatted() {
+    return (
+      <View style={styles.section}>
+        {schema.luscherResults &&
+          schema.luscherResults.split('\n').map(t => (
+            <Text key={key()} style={styles.paragraph}>
+              {t}
+            </Text>
+          ))}
+      </View>
+    )
+  }
+
+  function renderRaw() {
+    return (
+      raw &&
+      raw[0].map(s => (
+        <View key={key()} style={styles.section}>
+          <Text style={styles.title}>{s.title.toString()}</Text>
+
+          {s.interpretation.map(result => {
+            if (isObject(result)) {
+              return Object.entries(result).map(obj => (
+                <Text key={key()} style={styles.paragraph}>
+                  {obj[0]}: {obj[1]}
+                </Text>
+              ))
+            }
+
+            return (
+              <Text key={key()} style={styles.paragraph}>
+                {(result as string).toString()}
+              </Text>
+            )
+          })}
+        </View>
+      ))
+    )
+  }
+
   return (
-    <ScrollView style={styles.scroll} contentContainerStyle={styles.container}>
-      <LuscherInterpretation section={r0} />
-      <LuscherInterpretation section={r1} />
-    </ScrollView>
+    <View style={styles.container}>
+      {loading && <ActivityIndicator style={styles.loading} />}
+
+      {schema.luscherResults && renderFormatted()}
+
+      {!schema.luscherResults && renderRaw()}
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
-  scroll: {},
   container: {
     maxWidth: 900,
-    marginBottom: THEME.size[10],
-    paddingBottom: THEME.size[10],
+  },
+  loading: {
+    paddingTop: THEME.size[5],
+  },
+  section: {
+    paddingVertical: THEME.size[5],
+  },
+  title: {
+    fontFamily: THEME.font.display,
+    fontSize: THEME.size[3],
+    fontWeight: '800',
+    paddingBottom: THEME.size[3],
+  },
+  paragraph: {
+    fontSize: THEME.size[2],
+    lineHeight: THEME.size[4],
+    paddingBottom: THEME.size[1],
   },
 })

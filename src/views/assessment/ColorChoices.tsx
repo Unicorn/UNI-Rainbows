@@ -33,7 +33,7 @@ export default function ColorChoices({ step }: Props) {
 
     // If we filled up the first array, lets go to next step
     if (nextSchema[step].length === 8) {
-      router.push(`/${nextStep(schema.step)}`)
+      router.replace(`/${nextStep(schema.step)}`)
     }
   }
 

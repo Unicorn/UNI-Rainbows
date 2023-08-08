@@ -4,7 +4,7 @@ import Ipip from '@views/assessment/Ipip'
 import Header from '@views/global/Header'
 import Screen from '@views/global/Screen'
 
-export default function App() {
+export default () => {
   return (
     <Screen>
       <Header step="ipip" />
