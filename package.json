@@ -11,13 +11,9 @@
     "deploy:web": "expo export --platform web && firebase deploy --only hosting"
   },
   "dependencies": {
-    "@alheimsins/b5-johnson-120-ipip-neo-pi-r": "^6.0.5",
-    "@alheimsins/b5-result-text": "^5.0.5",
-    "@alheimsins/bigfive-calculate-score": "^3.0.3",
     "@bacons/react-views": "^1.1.3",
     "@expo/webpack-config": "^18.0.4",
     "@react-native-async-storage/async-storage": "1.18.2",
-    "@types/react": "~18.2.14",
     "expo": "^49.0.6",
     "expo-constants": "~14.4.2",
     "expo-linking": "~5.0.2",
@@ -46,12 +42,13 @@
     "react-native-url-polyfill": "^2.0.0",
     "react-native-uuid": "^2.0.1",
     "react-native-vector-icons": "^10.0.0",
-    "react-native-web": "~0.19.6",
-    "typescript": "^5.1.3"
+    "react-native-web": "~0.19.6"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
-    "@types/lodash": "^4.14.196"
+    "@types/lodash": "^4.14.196",
+    "@types/react": "~18.2.14",
+    "typescript": "^5.1.3"
   },
   "resolutions": {
     "react-refresh": "~0.14.0"
