@@ -20,8 +20,11 @@
     "register": {
       "header": "Register"
     },
-    "color1": {
-      "header": "Paint Your Rainbow"
+    "luscher1": {
+      "header": "Paint your Rainbow"
+    },
+    "luscher2": {
+      "header": "Finish your Rainbow"
     },
     "ipip": {
       "header": "Survey"

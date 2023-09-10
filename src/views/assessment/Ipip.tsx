@@ -2,12 +2,12 @@
 
 import { View, StyleSheet } from 'react-native'
 import { useTranslation } from 'react-i18next'
-import { IPIPAnswer, getQuestions } from '@lib/ipip'
-
-import { useSchema } from '@context/SchemaProvider'
-import QuestionBlock from './QuestionBlock'
-import { THEME } from '@config/theme'
 import { router } from 'expo-router'
+
+import { IPIPAnswer, getQuestions } from '@lib/ipip'
+import { useSchema } from '@context/SchemaProvider'
+import { THEME } from '@config/theme'
+import QuestionBlock from './QuestionBlock'
 
 export default function Ipip() {
   const { t } = useTranslation()

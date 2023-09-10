@@ -20,6 +20,8 @@ import { useSchema } from '@context/SchemaProvider'
 import { THEME } from '@config/theme'
 import { key } from '@utility/string'
 import { isObject } from 'lodash'
+import { IPIPDomain, IPIPFacet, getResults, getScore } from '@lib/ipip'
+import ScoreFacets from './ScoreFacets'
 
 export default function LuscherResults() {
   const [loading, setLoading] = useState(false)
@@ -40,10 +42,10 @@ export default function LuscherResults() {
       setRaw(luscherRaw)
 
       // ChatGPT Adds up! Lets fetch only if we don't already have it saved.
-      if (!schema.luscherResults) {
-        const luscherResults = await prettyLuscher(JSON.stringify(luscherRaw))
-        if (luscherResults) setSchema({ ...schema, luscherResults })
-      }
+      // if (!schema.luscherResults) {
+      //   const luscherResults = await prettyLuscher(JSON.stringify(luscherRaw))
+      //   if (luscherResults) setSchema({ ...schema, luscherResults })
+      // }
 
       setLoading(false)
 
@@ -64,12 +66,12 @@ export default function LuscherResults() {
       // console.log('emotionalStates', emotionalStates)
 
       // // State of anxiety level by color for each selection
-      // const anxietyLevels: [ColorMap<1 | 2 | 3>, ColorMap<1 | 2 | 3>] = test.anxietyLevels
-      // console.log('anxietyLevels', anxietyLevels)
+      const anxietyLevels: [ColorMap<1 | 2 | 3>, ColorMap<1 | 2 | 3>] = test.anxietyLevels
+      console.log('anxietyLevels', anxietyLevels)
 
       // // Total anxiety level for each selection
-      // const totalAnxietyLevel: [number, number] = test.totalAnxietyLevel
-      // console.log('totalAnxietyLevel', totalAnxietyLevel)
+      const totalAnxietyLevel: [number, number] = test.totalAnxietyLevel
+      console.log('totalAnxietyLevel', totalAnxietyLevel)
 
       // // Interpretation for total anxiety level of second selection
       // const anxietyLevelInterpretation: Translations<string> = test.anxietyLevelInterpretation
@@ -131,6 +133,28 @@ export default function LuscherResults() {
     )
   }
 
+  function renderIpip() {
+    const scores = getScore({ answers: schema.ipip.answers })
+    const results = getResults()
+
+    console.log(scores)
+    console.log(results.A.results[scores.A.result].text)
+    console.log('Facet', scores.A.facet)
+
+    return Object.keys(results).map(domain => {
+      const d = domain as IPIPDomain
+      return (
+        <View>
+          <Text style={styles.title}>
+            {results[d].title}: {scores[d].score} ({scores[d].result})
+          </Text>
+
+          <ScoreFacets domain={d} scores={scores} results={results[d].facets} />
+        </View>
+      )
+    })
+  }
+
   return (
     <View style={styles.container}>
       {loading && <ActivityIndicator style={styles.loading} />}
@@ -138,6 +162,8 @@ export default function LuscherResults() {
       {schema.luscherResults && renderFormatted()}
 
       {!schema.luscherResults && renderRaw()}
+
+      {renderIpip()}
     </View>
   )
 }
@@ -150,13 +176,19 @@ const styles = StyleSheet.create({
     paddingTop: THEME.size[5],
   },
   section: {
-    paddingVertical: THEME.size[5],
+    paddingVertical: THEME.size[3],
   },
   title: {
     fontFamily: THEME.font.display,
     fontSize: THEME.size[3],
     fontWeight: '800',
-    paddingBottom: THEME.size[3],
+    paddingBottom: THEME.size[2],
+    paddingTop: THEME.size[3],
+  },
+  h2: {
+    fontSize: THEME.size[2],
+    fontWeight: '600',
+    paddingVertical: THEME.size[1],
   },
   paragraph: {
     fontSize: THEME.size[2],
